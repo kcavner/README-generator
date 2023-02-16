@@ -1,6 +1,8 @@
+// required modules
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// inquirer prompt questions
 inquirer.prompt([
 {
     type:'input',
@@ -49,8 +51,11 @@ inquirer.prompt([
     name:'email'
 },
 ]).then((answers) => {
+//     mit badge if statment changes the value to the mit badge
     if(answers.liscence = 'mit'){
         answers.liscence = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)'}
+    
+//     readme template literal has predefined sections and table of contents
     const readme =
 `
 # ${answers.title}${answers.liscence}
@@ -88,6 +93,7 @@ ${answers.instructions}
     
 ## questions
 ${answers.username} ${answers.email}`
+//     write readme file with the file system module
 fs.writeFile("README.md", readme, (err) =>
 err ? console.error(err) : console.log('Success!'))
 })
